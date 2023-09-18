@@ -340,7 +340,7 @@ plot_Expanded <- function(id, df) {
           session$userData$QI_reactive_values$QI_displayaspercentage<-TRUE
           updateSelectInput(session, "selected_colx", selected = "mean")
         } else {session$userData$QI_reactive_values$QI_displayaspercentage<-FALSE}
-        QI_filt <- numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name, site_name=="Samaritan") %>% drop_na(Value)
+        QI_filt <- session$userData$QI_reactive_values$numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name, site_name=="Samaritan") %>% drop_na(Value)
         
   
 
@@ -407,7 +407,7 @@ plot_Expanded <- function(id, df) {
         index <- match(input$selected_col_dist, df$INDICATOR)
         QI_col <- df$COLUMN[index]
         session$userData$QI_reactive_values$QI_name_dist<-QI_col
-        QI_filt <- numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_dist, site_name=="Samaritan") %>% drop_na(Value)
+        QI_filt <- session$userData$QI_reactive_values$numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_dist, site_name=="Samaritan") %>% drop_na(Value)
         updateSliderInput(session, "slider_minmax_dist", value = c(min(QI_filt$Value),max(QI_filt$Value)),
                           min = min(QI_filt$Value), max = max(QI_filt$Value), step = 1)
       })
@@ -458,7 +458,7 @@ plot_Expanded <- function(id, df) {
         session$userData$QI_reactive_values$QI_xlab_corr<-input$selected_colx_corr
         QI_col <- df$COLUMN[index]
         session$userData$QI_reactive_values$QI_name_x_corr<-QI_col
-        QI_filt <- numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_x_corr, site_name=="Samaritan") %>% drop_na(Value)
+        QI_filt <- session$userData$QI_reactive_values$numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_x_corr, site_name=="Samaritan") %>% drop_na(Value)
         updateSliderInput(session, "slider_minmax_x_corr", value = c(min(QI_filt$Value),max(QI_filt$Value)),
                           min = min(QI_filt$Value), max = max(QI_filt$Value), step = 1)
       })
@@ -467,7 +467,7 @@ plot_Expanded <- function(id, df) {
         session$userData$QI_reactive_values$QI_ylab_corr<-input$selected_coly_corr
         QI_col <- df$COLUMN[index]
         session$userData$QI_reactive_values$QI_name_y_corr<-QI_col
-        QI_filt <- numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_y_corr, site_name=="Samaritan") %>% drop_na(Value)
+        QI_filt <- session$userData$QI_reactive_values$numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_y_corr, site_name=="Samaritan") %>% drop_na(Value)
         updateSliderInput(session, "slider_minmax_y_corr", value = c(min(QI_filt$Value),max(QI_filt$Value)),
                           min = min(QI_filt$Value), max = max(QI_filt$Value), step = 1)
       })
@@ -533,7 +533,7 @@ plot_Expanded <- function(id, df) {
         session$userData$QI_reactive_values$QI_ylab_comp<-input$selected_col_comp
         QI_col <- df$COLUMN[index]
         session$userData$QI_reactive_values$QI_name_comp<-QI_col
-        QI_filt <- numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_comp, site_name=="Samaritan") %>% drop_na(Value)
+        QI_filt <- session$userData$QI_reactive_values$numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_comp, site_name=="Samaritan") %>% drop_na(Value)
         updateSliderInput(session, "slider_minmax_comp", value = c(min(QI_filt$Value),max(QI_filt$Value)),
                           min = min(QI_filt$Value), max = max(QI_filt$Value), step = 1)
       })
@@ -575,7 +575,7 @@ plot_Expanded <- function(id, df) {
         if(!is.null(session$userData$QI_reactive_values$QI_name)) {
 
         
-          QI_data <- numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name, site_name=="Samaritan", gender %in% session$userData$QI_reactive_values$QI_gender, imaging_done %in% session$userData$QI_reactive_values$QI_imaging, prenotification%in%session$userData$QI_reactive_values$QI_prenotification, discharge_mrs%in%session$userData$QI_reactive_values$QI_mrs,YQ%in%session$userData$QI_reactive_values$QI_filterquarts, Value%in%session$userData$QI_reactive_values$QI_filterminmax) %>% 
+          QI_data <- session$userData$QI_reactive_values$numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name, site_name=="Samaritan", gender %in% session$userData$QI_reactive_values$QI_gender, imaging_done %in% session$userData$QI_reactive_values$QI_imaging, prenotification%in%session$userData$QI_reactive_values$QI_prenotification, discharge_mrs%in%session$userData$QI_reactive_values$QI_mrs,YQ%in%session$userData$QI_reactive_values$QI_filterquarts, Value%in%session$userData$QI_reactive_values$QI_filterminmax) %>% 
             drop_na(Value) %>% group_by(YQ, site_name, site_country) %>% 
             mutate(median = median(Value), sd = sd(Value), min=min(Value),
                       max=max(Value), mean=mean(Value), .groups = "drop") %>% ungroup()
@@ -602,7 +602,7 @@ plot_Expanded <- function(id, df) {
             }
             
             if(!is.null(session$userData$QI_reactive_values$compared_hospitals) && !is_empty(session$userData$QI_reactive_values$compared_hospitals)){
-              compare_data <- numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name, site_name%in%session$userData$QI_reactive_values$compared_hospitals, gender %in% session$userData$QI_reactive_values$QI_gender, imaging_done %in% session$userData$QI_reactive_values$QI_imaging, prenotification%in%session$userData$QI_reactive_values$QI_prenotification, discharge_mrs%in%session$userData$QI_reactive_values$QI_mrs,YQ%in%session$userData$QI_reactive_values$QI_filterquarts, Value%in%session$userData$QI_reactive_values$QI_filterminmax) %>% 
+              compare_data <- session$userData$QI_reactive_values$numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name, site_name%in%session$userData$QI_reactive_values$compared_hospitals, gender %in% session$userData$QI_reactive_values$QI_gender, imaging_done %in% session$userData$QI_reactive_values$QI_imaging, prenotification%in%session$userData$QI_reactive_values$QI_prenotification, discharge_mrs%in%session$userData$QI_reactive_values$QI_mrs,YQ%in%session$userData$QI_reactive_values$QI_filterquarts, Value%in%session$userData$QI_reactive_values$QI_filterminmax) %>% 
               drop_na(Value) %>%  group_by(site_name,YQ) %>% 
                 mutate(median = median(Value), sd = sd(Value), min=min(Value),
                        max=max(Value), mean=mean(Value), .groups = "drop") %>% ungroup()
@@ -616,7 +616,7 @@ plot_Expanded <- function(id, df) {
             
             if(session$userData$QI_reactive_values$compare_national==TRUE){
               
-              compare_nat_data <- numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name, site_name!="Samaritan", gender %in% session$userData$QI_reactive_values$QI_gender, imaging_done %in% session$userData$QI_reactive_values$QI_imaging, prenotification%in%session$userData$QI_reactive_values$QI_prenotification, discharge_mrs%in%session$userData$QI_reactive_values$QI_mrs,YQ%in%session$userData$QI_reactive_values$QI_filterquarts, Value%in%session$userData$QI_reactive_values$QI_filterminmax) %>% 
+              compare_nat_data <- session$userData$QI_reactive_values$numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name, site_name!="Samaritan", gender %in% session$userData$QI_reactive_values$QI_gender, imaging_done %in% session$userData$QI_reactive_values$QI_imaging, prenotification%in%session$userData$QI_reactive_values$QI_prenotification, discharge_mrs%in%session$userData$QI_reactive_values$QI_mrs,YQ%in%session$userData$QI_reactive_values$QI_filterquarts, Value%in%session$userData$QI_reactive_values$QI_filterminmax) %>% 
               drop_na(Value) %>% group_by(YQ) %>% 
                 mutate(median = median(Value), sd = sd(Value), min=min(Value),
                        max=max(Value), mean=mean(Value), .groups = "drop") %>% ungroup()
@@ -636,7 +636,7 @@ plot_Expanded <- function(id, df) {
       output$distPlot <- renderPlotly({
         
         
-        QI_data_dist <- numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_dist, site_name=="Samaritan", gender %in% session$userData$QI_reactive_values$QI_gender_dist, imaging_done %in% session$userData$QI_reactive_values$QI_imaging_dist, prenotification%in%session$userData$QI_reactive_values$QI_prenotification_dist, discharge_mrs%in%session$userData$QI_reactive_values$QI_mrs_dist,YQ%in%session$userData$QI_reactive_values$QI_filterquarts_dist, Value%in%session$userData$QI_reactive_values$QI_filterminmax_dist) %>% drop_na(Value) %>% 
+        QI_data_dist <- session$userData$QI_reactive_values$numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_dist, site_name=="Samaritan", gender %in% session$userData$QI_reactive_values$QI_gender_dist, imaging_done %in% session$userData$QI_reactive_values$QI_imaging_dist, prenotification%in%session$userData$QI_reactive_values$QI_prenotification_dist, discharge_mrs%in%session$userData$QI_reactive_values$QI_mrs_dist,YQ%in%session$userData$QI_reactive_values$QI_filterquarts_dist, Value%in%session$userData$QI_reactive_values$QI_filterminmax_dist) %>% drop_na(Value) %>% 
           group_by(site_name, site_country) 
         
         if (nrow(QI_data_dist)>1){
@@ -655,7 +655,7 @@ plot_Expanded <- function(id, df) {
         
         if(session$userData$QI_reactive_values$compare_national_dist==TRUE){
         
-          compare_nat_data_dist <- numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_dist, site_name!="Samaritan", gender %in% session$userData$QI_reactive_values$QI_gender_dist, imaging_done %in% session$userData$QI_reactive_values$QI_imaging_dist, prenotification%in%session$userData$QI_reactive_values$QI_prenotification_dist, discharge_mrs%in%session$userData$QI_reactive_values$QI_mrs_dist,YQ%in%session$userData$QI_reactive_values$QI_filterquarts_dist, Value%in%session$userData$QI_reactive_values$QI_filterminmax_dist) %>% 
+          compare_nat_data_dist <- session$userData$QI_reactive_values$numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_dist, site_name!="Samaritan", gender %in% session$userData$QI_reactive_values$QI_gender_dist, imaging_done %in% session$userData$QI_reactive_values$QI_imaging_dist, prenotification%in%session$userData$QI_reactive_values$QI_prenotification_dist, discharge_mrs%in%session$userData$QI_reactive_values$QI_mrs_dist,YQ%in%session$userData$QI_reactive_values$QI_filterquarts_dist, Value%in%session$userData$QI_reactive_values$QI_filterminmax_dist) %>% 
             drop_na(Value) %>% group_by(site_country)
           
           
@@ -664,7 +664,7 @@ plot_Expanded <- function(id, df) {
         }
         
         if(!is.null(session$userData$QI_reactive_values$compared_hospitals_dist) && !is_empty(session$userData$QI_reactive_values$compared_hospitals_dist) && session$userData$QI_reactive_values$compared_hospitals_dist!="None"){
-          compare_data_dist <- numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name, site_name==session$userData$QI_reactive_values$compared_hospitals_dist, gender %in% session$userData$QI_reactive_values$QI_gender_dist, imaging_done %in% session$userData$QI_reactive_values$QI_imaging_dist, prenotification%in%session$userData$QI_reactive_values$QI_prenotification_dist, discharge_mrs%in%session$userData$QI_reactive_values$QI_mrs_dist,YQ%in%session$userData$QI_reactive_values$QI_filterquarts_dist, Value%in%session$userData$QI_reactive_values$QI_filterminmax_dist) %>% 
+          compare_data_dist <- session$userData$QI_reactive_values$numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name, site_name==session$userData$QI_reactive_values$compared_hospitals_dist, gender %in% session$userData$QI_reactive_values$QI_gender_dist, imaging_done %in% session$userData$QI_reactive_values$QI_imaging_dist, prenotification%in%session$userData$QI_reactive_values$QI_prenotification_dist, discharge_mrs%in%session$userData$QI_reactive_values$QI_mrs_dist,YQ%in%session$userData$QI_reactive_values$QI_filterquarts_dist, Value%in%session$userData$QI_reactive_values$QI_filterminmax_dist) %>% 
             drop_na(Value) %>%  group_by(site_name)
           
           
@@ -677,10 +677,10 @@ plot_Expanded <- function(id, df) {
       })
       
     output$corrPlot <- renderPlotly({
-      QI_data_x_corr <- numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_x_corr, site_name=="Samaritan", gender %in% session$userData$QI_reactive_values$QI_gender_corr, imaging_done %in% session$userData$QI_reactive_values$QI_imaging_corr, prenotification%in%session$userData$QI_reactive_values$QI_prenotification_corr, discharge_mrs%in%session$userData$QI_reactive_values$QI_mrs_corr,YQ%in%session$userData$QI_reactive_values$QI_filterquarts_corr, Value%in%session$userData$QI_reactive_values$QI_filterminmax_x_corr) %>% drop_na(Value) %>% 
+      QI_data_x_corr <- session$userData$QI_reactive_values$numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_x_corr, site_name=="Samaritan", gender %in% session$userData$QI_reactive_values$QI_gender_corr, imaging_done %in% session$userData$QI_reactive_values$QI_imaging_corr, prenotification%in%session$userData$QI_reactive_values$QI_prenotification_corr, discharge_mrs%in%session$userData$QI_reactive_values$QI_mrs_corr,YQ%in%session$userData$QI_reactive_values$QI_filterquarts_corr, Value%in%session$userData$QI_reactive_values$QI_filterminmax_x_corr) %>% drop_na(Value) %>% 
         group_by(site_name, site_country) 
       
-      QI_data_y_corr <- numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_y_corr, site_name=="Samaritan", gender %in% session$userData$QI_reactive_values$QI_gender_corr, imaging_done %in% session$userData$QI_reactive_values$QI_imaging_corr, prenotification%in%session$userData$QI_reactive_values$QI_prenotification_corr, discharge_mrs%in%session$userData$QI_reactive_values$QI_mrs_corr,YQ%in%session$userData$QI_reactive_values$QI_filterquarts_corr, Value%in%session$userData$QI_reactive_values$QI_filterminmax_y_corr) %>% drop_na(Value) %>% 
+      QI_data_y_corr <- session$userData$QI_reactive_values$numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_y_corr, site_name=="Samaritan", gender %in% session$userData$QI_reactive_values$QI_gender_corr, imaging_done %in% session$userData$QI_reactive_values$QI_imaging_corr, prenotification%in%session$userData$QI_reactive_values$QI_prenotification_corr, discharge_mrs%in%session$userData$QI_reactive_values$QI_mrs_corr,YQ%in%session$userData$QI_reactive_values$QI_filterquarts_corr, Value%in%session$userData$QI_reactive_values$QI_filterminmax_y_corr) %>% drop_na(Value) %>% 
         group_by(site_name, site_country) 
       
       QI_data_corr <- merge(QI_data_x_corr, QI_data_y_corr, by = c("YQ", "site_name", "site_id", "subject_id","gender", "discharge_mrs", "prenotification","three_m_mrs", "imaging_done","occup_physiotherapy_received", "dysphagia_screening_done"))
@@ -703,7 +703,7 @@ plot_Expanded <- function(id, df) {
     })
     
     output$compPlot <- renderPlotly({
-      QI_data_comp <- numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_comp, site_name=="Samaritan",YQ%in%session$userData$QI_reactive_values$QI_filterquarts_comp, Value%in%session$userData$QI_reactive_values$QI_filterminmax_comp) %>% drop_na(Value) %>% 
+      QI_data_comp <- session$userData$QI_reactive_values$numVars %>% filter(QI == session$userData$QI_reactive_values$QI_name_comp, site_name=="Samaritan",YQ%in%session$userData$QI_reactive_values$QI_filterquarts_comp, Value%in%session$userData$QI_reactive_values$QI_filterminmax_comp) %>% drop_na(Value) %>% 
         group_by(site_name, site_country) 
       
       compPlot <- ggplot(data = QI_data_comp, aes(x = as.factor(.data[[session$userData$QI_reactive_values$QI_split_comp]]), y = Value, color=as.factor(.data[[session$userData$QI_reactive_values$QI_split_comp]]))) +

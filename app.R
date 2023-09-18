@@ -21,31 +21,34 @@ source("modules/plot_Expanded.R", local = T)
 #  browseURL(url = "logs")
 #})
 
-db <- dataLoader()
-numVars <- db$numVars
-numVars <- numVars %>% filter(YQ!="2016 Q1", YQ!="2016 Q2", YQ!="2016 Q3", YQ!="2016 Q4", 
-                              YQ!="2017 Q1", YQ!="2017 Q2", YQ!="2017 Q3", YQ!="2017 Q4")
 
-hospitals <- numVars %>% filter(site_name!="Samaritan", site_name!="Memorial", site_name!="Progress") 
-hospitals <- unique(hospitals$site_name)
+#hospitals <- numVars %>% filter(site_name!="Samaritan", site_name!="Memorial", site_name!="Progress") 
+#hospitals <- unique(hospitals$site_name)
 #catVars <- db$catVars
 
 #Load QI data, check data/QI_info.csv and utils/QILoader.R to see what data is being loaded and how.
 #QI_db <- QILoader()
 
-quarts <- numVars$YQ
+#quarts <- numVars$YQ
 
 ui <- fluidPage(
-  plot_Expanded_UI("Dashboard", QILoader()$INDICATOR, hospitals)
+  plot_Expanded_UI("Dashboard", QILoader()$INDICATOR, c("General", "Hope", "Paradise", "Rose", "Angelvale", "Mercy"))
 )
 
 server <- function(input, output, session) {
+  db <- dataLoader()
+  numVars <- db$numVars
+  numVars <- numVars %>% filter(YQ!="2016 Q1", YQ!="2016 Q2", YQ!="2016 Q3", YQ!="2016 Q4", 
+                                YQ!="2017 Q1", YQ!="2017 Q2", YQ!="2017 Q3", YQ!="2017 Q4")
   #Load hospital data, check data/dataREanonymized.csv and utils/dataLoader.R to see what data is being loaded and how.
   
   #view(numVars)
   #view(catVars)
   #view(QI_db)
   session$userData$QI_reactive_values <- reactiveValues()
+  
+  session$userData$QI_reactive_values$numVars <- numVars %>% filter(YQ!="2016 Q1", YQ!="2016 Q2", YQ!="2016 Q3", YQ!="2016 Q4", 
+                                                                    YQ!="2017 Q1", YQ!="2017 Q2", YQ!="2017 Q3", YQ!="2017 Q4")
   
   session$userData$QI_reactive_values$QI_name <- "Door-to-imaging time"
   session$userData$QI_reactive_values$QI_agg <- "median"
