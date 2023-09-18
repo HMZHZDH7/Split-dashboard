@@ -31,12 +31,12 @@ hospitals <- unique(hospitals$site_name)
 #catVars <- db$catVars
 
 #Load QI data, check data/QI_info.csv and utils/QILoader.R to see what data is being loaded and how.
-QI_db <- QILoader()
+#QI_db <- QILoader()
 
 quarts <- numVars$YQ
 
 ui <- fluidPage(
-  plot_Expanded_UI("Dashboard", QI_db$INDICATOR, hospitals)
+  plot_Expanded_UI("Dashboard", QILoader()$INDICATOR, hospitals)
 )
 
 server <- function(input, output, session) {
@@ -97,7 +97,7 @@ server <- function(input, output, session) {
   session$userData$QI_reactive_values$QI_ylab_comp <- NULL
   session$userData$QI_reactive_values$QI_xlab_comp <- NULL
   
-  plot_Expanded("Dashboard",QI_db)
+  plot_Expanded("Dashboard",QILoader())
 }
 
 shinyApp(ui = ui, server = server)
