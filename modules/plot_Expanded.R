@@ -17,7 +17,7 @@ plot_Expanded_UI <- function(id, database, hospitals, quarts) {
                inputId = ns("selected_col"),
                label = h6("Select y-axis variable"),
                choices = database,
-               selected = "Door-to-imaging time"),
+               selected = "Door-to-needle for IVT, median"),
              
              selectInput(
                inputId = ns("selected_colx"),
@@ -76,16 +76,15 @@ plot_Expanded_UI <- function(id, database, hospitals, quarts) {
              sliderInput(ns("slider_minmax"), label = h6("Filter values of y-axis variable (slider shows range of values in y-axis variable)"),
                          min = 0, max = 100, value = c(0, 100)),
              
+             
              checkboxGroupInput(
                 inputId = ns("selected_quarts"),
                 label = h6("Quarters shown in plot:"),
-                choices = c("2018 Q1", "2018 Q2", "2018 Q3", "2018 Q4",
-                            "2019 Q1", "2019 Q2", "2019 Q3", "2019 Q4",
+                choices = c("2019 Q1", "2019 Q2", "2019 Q3", "2019 Q4",
                             "2020 Q1", "2020 Q2", "2020 Q3", "2020 Q4",
                             "2021 Q1", "2021 Q2", "2021 Q3", "2021 Q4",
                             "2022 Q1", "2022 Q2", "2022 Q3", "2022 Q4"),
-                selected = c("2018 Q1", "2018 Q2", "2018 Q3", "2018 Q4",
-                             "2019 Q1", "2019 Q2", "2019 Q3", "2019 Q4",
+                selected = c("2019 Q1", "2019 Q2", "2019 Q3", "2019 Q4",
                              "2020 Q1", "2020 Q2", "2020 Q3", "2020 Q4",
                              "2021 Q1", "2021 Q2", "2021 Q3", "2021 Q4",
                              "2022 Q1", "2022 Q2", "2022 Q3", "2022 Q4")), 
@@ -112,7 +111,7 @@ plot_Expanded_UI <- function(id, database, hospitals, quarts) {
                inputId = ns("selected_col_dist"),
                label = h6("Select y-axis variable"),
                choices = database,
-               selected = "Door-to-imaging time"),
+               selected = "Door-to-needle for IVT, median"),
              
              h6("Show mean"),
              checkboxInput(inputId = ns("selected_mean_dist"), "Show mean line", value = FALSE),
@@ -167,13 +166,11 @@ plot_Expanded_UI <- function(id, database, hospitals, quarts) {
              checkboxGroupInput(
                inputId = ns("selected_quarts_dist"),
                label = h6("Quarters shown in plot:"),
-               choices = c("2018 Q1", "2018 Q2", "2018 Q3", "2018 Q4",
-                           "2019 Q1", "2019 Q2", "2019 Q3", "2019 Q4",
+               choices = c("2019 Q1", "2019 Q2", "2019 Q3", "2019 Q4",
                            "2020 Q1", "2020 Q2", "2020 Q3", "2020 Q4",
                            "2021 Q1", "2021 Q2", "2021 Q3", "2021 Q4",
                            "2022 Q1", "2022 Q2", "2022 Q3", "2022 Q4"),
-               selected = c("2018 Q1", "2018 Q2", "2018 Q3", "2018 Q4",
-                            "2019 Q1", "2019 Q2", "2019 Q3", "2019 Q4",
+               selected = c("2019 Q1", "2019 Q2", "2019 Q3", "2019 Q4",
                             "2020 Q1", "2020 Q2", "2020 Q3", "2020 Q4",
                             "2021 Q1", "2021 Q2", "2021 Q3", "2021 Q4",
                             "2022 Q1", "2022 Q2", "2022 Q3", "2022 Q4")), 
@@ -195,7 +192,7 @@ plot_Expanded_UI <- function(id, database, hospitals, quarts) {
                inputId = ns("selected_colx_corr"),
                label = h6("Select x-axis variable"),
                choices = database,
-               selected = "Door-to-imaging time"),
+               selected = "Door-to-needle for IVT, median"),
              
              selectInput(
                inputId = ns("selected_coly_corr"),
@@ -254,13 +251,11 @@ plot_Expanded_UI <- function(id, database, hospitals, quarts) {
              checkboxGroupInput(
                inputId = ns("selected_quarts_corr"),
                label = h6("Quarters shown in plot:"),
-               choices = c("2018 Q1", "2018 Q2", "2018 Q3", "2018 Q4",
-                           "2019 Q1", "2019 Q2", "2019 Q3", "2019 Q4",
+               choices = c("2019 Q1", "2019 Q2", "2019 Q3", "2019 Q4",
                            "2020 Q1", "2020 Q2", "2020 Q3", "2020 Q4",
                            "2021 Q1", "2021 Q2", "2021 Q3", "2021 Q4",
                            "2022 Q1", "2022 Q2", "2022 Q3", "2022 Q4"),
-               selected = c("2018 Q1", "2018 Q2", "2018 Q3", "2018 Q4",
-                            "2019 Q1", "2019 Q2", "2019 Q3", "2019 Q4",
+               selected = c("2019 Q1", "2019 Q2", "2019 Q3", "2019 Q4",
                             "2020 Q1", "2020 Q2", "2020 Q3", "2020 Q4",
                             "2021 Q1", "2021 Q2", "2021 Q3", "2021 Q4",
                             "2022 Q1", "2022 Q2", "2022 Q3", "2022 Q4")), 
@@ -277,7 +272,7 @@ plot_Expanded_UI <- function(id, database, hospitals, quarts) {
               inputId = ns("selected_col_comp"),
               label = h6("Select y-axis variable"),
               choices = database,
-              selected = "Door-to-imaging time"),
+              selected = "Door-to-needle for IVT, median"),
             
             selectInput(
               inputId = ns("selected_split_comp"),
@@ -296,13 +291,11 @@ plot_Expanded_UI <- function(id, database, hospitals, quarts) {
                    checkboxGroupInput(
                      inputId = ns("selected_quarts_comp"),
                      label = h6("Quarters shown in plot:"),
-                     choices = c("2018 Q1", "2018 Q2", "2018 Q3", "2018 Q4",
-                                 "2019 Q1", "2019 Q2", "2019 Q3", "2019 Q4",
+                     choices = c("2019 Q1", "2019 Q2", "2019 Q3", "2019 Q4",
                                  "2020 Q1", "2020 Q2", "2020 Q3", "2020 Q4",
                                  "2021 Q1", "2021 Q2", "2021 Q3", "2021 Q4",
                                  "2022 Q1", "2022 Q2", "2022 Q3", "2022 Q4"),
-                     selected = c("2018 Q1", "2018 Q2", "2018 Q3", "2018 Q4",
-                                  "2019 Q1", "2019 Q2", "2019 Q3", "2019 Q4",
+                     selected = c("2019 Q1", "2019 Q2", "2019 Q3", "2019 Q4",
                                   "2020 Q1", "2020 Q2", "2020 Q3", "2020 Q4",
                                   "2021 Q1", "2021 Q2", "2021 Q3", "2021 Q4",
                                   "2022 Q1", "2022 Q2", "2022 Q3", "2022 Q4")), 

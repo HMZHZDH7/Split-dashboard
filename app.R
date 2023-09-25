@@ -50,7 +50,7 @@ server <- function(input, output, session) {
   session$userData$QI_reactive_values$numVars <- numVars %>% filter(YQ!="2016 Q1", YQ!="2016 Q2", YQ!="2016 Q3", YQ!="2016 Q4", 
                                                                     YQ!="2017 Q1", YQ!="2017 Q2", YQ!="2017 Q3", YQ!="2017 Q4")
   
-  session$userData$QI_reactive_values$QI_name <- "Door-to-imaging time"
+  session$userData$QI_reactive_values$QI_name <- "Door-to-needle for IVT, median"
   session$userData$QI_reactive_values$QI_agg <- "median"
   session$userData$QI_reactive_values$QI_trend <- FALSE
   session$userData$QI_reactive_values$QI_error <- FALSE
@@ -65,7 +65,7 @@ server <- function(input, output, session) {
   session$userData$QI_reactive_values$QI_displayaspercentage <- NULL
   session$userData$QI_reactive_values$QI_ylab <- NULL
     
-  session$userData$QI_reactive_values$QI_name_dist <- "Door-to-imaging time"
+  session$userData$QI_reactive_values$QI_name_dist <- "Door-to-needle for IVT, median"
   session$userData$QI_reactive_values$QI_mean_dist <- FALSE
   session$userData$QI_reactive_values$QI_median_dist <- FALSE
   session$userData$QI_reactive_values$compared_hospitals_dist <- NULL
@@ -78,7 +78,7 @@ server <- function(input, output, session) {
   session$userData$QI_reactive_values$QI_mrs_dist <- c(0:6)
   session$userData$QI_reactive_values$QI_xlab_dist <- NULL
     
-  session$userData$QI_reactive_values$QI_name_x_corr <- "Door-to-imaging time"
+  session$userData$QI_reactive_values$QI_name_x_corr <- "Door-to-needle for IVT, median"
   session$userData$QI_reactive_values$QI_name_y_corr <- "Modified ranking scale discharge"
   session$userData$QI_reactive_values$QI_filterminmax_x_corr <- NULL
   session$userData$QI_reactive_values$QI_filterminmax_y_corr <- NULL
@@ -93,7 +93,7 @@ server <- function(input, output, session) {
   session$userData$QI_reactive_values$QI_ylab_corr <- NULL
   session$userData$QI_reactive_values$QI_splitlab_corr <- NULL
     
-  session$userData$QI_reactive_values$QI_name_comp <- "Door-to-imaging time"
+  session$userData$QI_reactive_values$QI_name_comp <- "Door-to-needle for IVT, median"
   session$userData$QI_reactive_values$QI_split_comp<- NULL
   session$userData$QI_reactive_values$QI_filterminmax_comp <- NULL
   session$userData$QI_reactive_values$QI_filterquarts_comp <- NULL
